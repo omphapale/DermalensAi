@@ -8,7 +8,8 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-   origin: "https://dermalens-ai01.vercel.app",
+   origin: ["http://localhost:5173",
+   "https://dermalens-ai01.vercel.app"],
    credentials: true
 }))
 
