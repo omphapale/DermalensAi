@@ -142,7 +142,7 @@ Return content for EVERY field in the response schema.
 Do not return empty arrays.
 `;
 
-  const response = await ai.models.generateContent({
+  const response = await ai.models.generateContentStream({
 
     model: "gemini-3.5-flash-lite",
 
@@ -268,7 +268,7 @@ STRICT RESPONSE RULES:
 Return only the answer. No greeting, heading unless useful, or unnecessary explanation.
 `;
 
-  const response = await ai.models.generateContent({
+  const response = await ai.models.generateContentStream({
     model: "gemini-3.5-flash-lite",
     contents: [
       {
