@@ -144,7 +144,7 @@ Do not return empty arrays.
 
   const response = await ai.models.generateContentStream({
 
-    model: "gemini-2.5-flash",
+    model: "gemini-3.8-flash",
 
     contents: [
       {
@@ -291,7 +291,7 @@ Return only the answer. No greeting, heading unless useful, or unnecessary expla
 `;
 
   const response = await ai.models.generateContentStream({
-    model: "gemini-2.5-flash",
+    model: "gemini-3.8-flash",
     contents: [
       {
         role: "user",
