@@ -117,7 +117,6 @@ DermaLens-AI/
 │   ├── models/
 │   ├── routes/
 │   ├── services/
-│   ├── uploads/
 │   ├── app.js
 │   └── server.js
 │
