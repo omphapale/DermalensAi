@@ -168,26 +168,48 @@ Do not return empty arrays.
     },
   });
 
-  try {
 
-    const result = JSON.parse(response.text);
+  let responseText = "";
 
-    // Validate Gemini response against Zod schema
-    const validatedResult = assessmentSchema.parse(result);
+for await (const chunk of response) {
+  responseText += chunk.text || "";
+}
 
-    return validatedResult;
-
-  } catch (error) {
-
-    console.error(
-      "Invalid Gemini assessment response:",
-      error
-    );
-
-    throw new Error(
-      "Gemini returned an invalid assessment response"
-    );
+try {
+  if (!responseText.trim()) {
+    throw new Error("Gemini returned an empty assessment response");
   }
+
+  const result = JSON.parse(responseText);
+  const validatedResult = assessmentSchema.parse(result);
+
+  return validatedResult;
+} catch (error) {
+  console.error("Invalid Gemini assessment response:", error);
+  throw error;
+}
+
+
+  // try {
+
+  //   const result = JSON.parse(response.text);
+
+  //   // Validate Gemini response against Zod schema
+  //   const validatedResult = assessmentSchema.parse(result);
+
+  //   return validatedResult;
+
+  // } catch (error) {
+
+  //   console.error(
+  //     "Invalid Gemini assessment response:",
+  //     error
+  //   );
+
+  //   throw new Error(
+  //     "Gemini returned an invalid assessment response"
+  //   );
+  // }
 }
 
 
@@ -282,13 +304,29 @@ Return only the answer. No greeting, heading unless useful, or unnecessary expla
     },
   });
 
-  const reply = response.text?.trim();
 
-  if (!reply) {
-    throw new Error("Gemini returned an empty chat response");
-  }
 
-  return reply;
+  let responseText = "";
+
+for await (const chunk of response) {
+  responseText += chunk.text || "";
+}
+
+const reply = responseText.trim();
+
+if (!reply) {
+  throw new Error("Gemini returned an empty chat response");
+}
+
+return reply;
+
+  // const reply = response.text?.trim();
+
+  // if (!reply) {
+  //   throw new Error("Gemini returned an empty chat response");
+  // }
+
+  // return reply;
 }
 
 
